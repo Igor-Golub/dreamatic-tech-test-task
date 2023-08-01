@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import {
   Stack,
   StackProps,
@@ -13,6 +13,8 @@ import { Currencies } from "../../enums";
 const ConventionCardHeader = () => {
   const { to, amountFrom, amountTo, date, timestamp } = useMainContext();
 
+  const dateValue = useMemo<string>(() => `Last update - ${date} ${dayjs(timestamp).format("HH:mm")}` ?? dayjs().format("DD-MM-YY"), [])
+
   return (
     <StyledStack>
       <StyledTypography>
@@ -22,8 +24,7 @@ const ConventionCardHeader = () => {
         {amountTo} {to}
       </StyledTypography>
       <StyledTypography>
-        {`Last update - ${date} ${dayjs(timestamp).format("HH:mm")}` ??
-          dayjs().format("DD-MM-YY")}
+        {dateValue}
       </StyledTypography>
     </StyledStack>
   );

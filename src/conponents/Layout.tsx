@@ -1,12 +1,15 @@
 import React, { FC, PropsWithChildren } from "react";
 import { Box, BoxProps, styled } from "@mui/material";
 import { StyledEngineProvider } from "@mui/material/styles";
+import ErrorBoundary from "./ErrorBoundary";
 
 const Layout: FC<PropsWithChildren> = ({ children }) => {
   return (
-    <StyledEngineProvider injectFirst>
-      <StyledBox>{children}</StyledBox>
-    </StyledEngineProvider>
+    <ErrorBoundary>
+      <StyledEngineProvider injectFirst>
+        <StyledBox>{children}</StyledBox>
+      </StyledEngineProvider>
+    </ErrorBoundary>
   );
 };
 

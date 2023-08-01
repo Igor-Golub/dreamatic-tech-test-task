@@ -1,25 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { ConventionCard } from "./widget";
+import Layout from "./conponents/Layout";
+import { Alert, Snackbar } from "@mui/material";
+import { useMainContext } from "./context";
 
 function App() {
+  const { isError, errorMessage, handleResetError } = useMainContext();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <Layout>
+      <>
+        <ConventionCard />
+        <Snackbar
+          open={isError}
+          onClose={handleResetError}
+          autoHideDuration={2000}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          <Alert severity="error">{errorMessage}</Alert>
+        </Snackbar>
+      </>
+    </Layout>
   );
 }
 
